@@ -1,3 +1,18 @@
-body{background-color:brown;}
+body{background-color:rgb(181, 109, 37);}
 
-h1{color:blue;font-size: 150px;}
+h1{
+    
+    color:darkkhaki;font-size: 150px;
+    padding-left: 20px;
+}
+
+h2{color:rgb(85, 64, 31);font-size: 75px;
+    margin:10px;}
+
+*{
+    border: solid 1px red;
+}
+.blur-effect:hover {
+    filter: blur(5px); /* Cambia el valor de 5px según lo que desees */
+    transition: all 0.3s ease; /* Añade transición suave al pasar el cursor */
+  }
