@@ -1,16 +1,28 @@
 body{background-color:rgb(165, 159, 153);}
 
+
+@media screen and (max-width: 600px) {
+.imagenes{
+    display: none;
+  }
+  .ul{
+    display: flex;
+    position: absolute;
+  }
+}
+
 h1{
     margin-left: 30 0px;
     margin-right: 300px;
-    color:darkkhaki;font-size: 150px;
+    color:darkkhaki;
+    font-size: 15vw;
     padding-left: 20px;
 }
 
 #titular{
     font-family:"Lucida Console","Courier liew",monospace}
 
-h2{color:rgb(85, 64, 31);font-size: 75px;
+h2{color:rgb(85, 64, 31);font-size: 10vw;
     margin:10px;}
 
 .blur-effect:hover {
@@ -43,6 +55,31 @@ nav li{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "logo navbar navbar navbar"
+    "main main main sidebar"
+    "main2 main2 main2 sidebar"
+    "footer footer footer footer";
+}
+
+.logo { grid-area: logo; }
+
+.navbar { grid-area: navbar; }
+
+.main { grid-area: main; }
+
+.sidebar { grid-area: sidebar; }
+
+.main2 { grid-area: main2; }
+
+.footer { grid-area: footer; }
+
+
 button{
     background-color: rgb(216, 203, 195); color: white;
     padding: 15px;
@@ -54,7 +91,7 @@ button{
     background-color: #4CAF50;
     color: white;
     padding: 16px;
-    font-size: 16px;
+    font-size: 5vw;
     border: none;
     cursor: pointer;
   }
