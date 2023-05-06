@@ -4,12 +4,17 @@ body{background-color:rgb(230, 229, 227);}
 
 .navbar{
   height: 120px;
-  background-color:rgb(251, 251, 251);
+  background-color:rgb(255, 255, 255);
 
 }
 
 .navbar-brand{
-  font-size: 50px;
+  margin-left: 4vw  ;
+}
+
+.navbar-toggler{
+  margin-right: 2vw;
+
 }
 
 @media screen and (max-width: 600px) {
