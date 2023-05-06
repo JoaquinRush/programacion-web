@@ -33,8 +33,23 @@ h2{color:rgb(85, 64, 31);font-size: 10vw;
     filter: blur(5px); /* Cambia el valor de 5px según lo que desees */
     transition: all 0.3s ease; /* Añade transición suave al pasar el cursor */
   }
-
-#img_libro{width:25vw;}
+  .container {
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "main main main main"
+      "main main main main"
+      "Nike Nike main2 main2"
+      "Adidas Adidas main2 main2"
+      "footer footer footer footer"; 
+  }
+  .footer { grid-area: footer; }
+  .main { grid-area: main; }
+  .Nike { grid-area: Nike; }
+  .Adidas { grid-area: Adidas; }
+  .main2 { grid-area: main2; }
 
 
 
