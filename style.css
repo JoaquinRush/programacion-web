@@ -133,7 +133,9 @@ header{
   background: var(--twitter);
 }
 
-
+.card :hover{
+  filter:drop-shadow(1px 1px 1px #000)
+}
 
 .d-none{
   display: block !important;
@@ -142,9 +144,10 @@ header{
   filter: blur(5px);
 }
 
-
-
-
-
+.add-to-cart-btn{
+  border-radius: 5px;
+  height:45px;
+  background-color: rgb(163, 158, 150);
+}
 
 
