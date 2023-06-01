@@ -6,6 +6,16 @@ header{
   flex-direction: row;
 }
 
+.claseNav{
+  height: 120px;
+  display: flex;
+  background-color:rgb(255, 255, 255); 
+  z-index: 9999;
+  top: 0;
+  position:sticky;
+
+
+}
 
 .navbar{
   height: 120px;
@@ -15,7 +25,6 @@ header{
   top: 0;
 
 }
-
 .navbar-brand{
   margin-left: 4vw  ;
 
@@ -38,11 +47,11 @@ header{
 
 .botonvolver{
   border-radius: 5px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(230, 229, 227);
   margin-top: 1vw;
   margin-left: 1vw;
   margin-bottom: 1vw;
-  width: 60px;
+  width: 60px;                                                    
   
   
 
@@ -150,4 +159,7 @@ header{
   background-color: rgb(163, 158, 150);
 }
 
-
+#cart{
+  color: #454746;
+  
+}
