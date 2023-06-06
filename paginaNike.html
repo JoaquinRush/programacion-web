@@ -51,7 +51,7 @@
             <div class="card-body">
               <h5 class="card-title">Nike Dunk Low Retro Gris</h5>
               <p class="card-text">52.999$</p>
-              <button class="add-to-cart-btn">Agregar al carrito</button>
+              <button class="add-to-cart-btn" data-name="Nike Dunk Low Retro Gris" data-price="52999">Agregar al carrito</button>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@
             <div class="card-body">
               <h5 class="card-title">Jordan Air 1 Mid</h5>
               <p class="card-text">62.999$</p>
-              <button class="add-to-cart-btn">Agregar al carrito</button>
+              <button class="add-to-cart-btn" data-name="Jordan Air 1 Mid" data-price="62999">Agregar al carrito</button>
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@
             <div class="card-body">
               <h5 class="card-title">Nike Air Max 97</h5>
               <p class="card-text">81.999$</p>
-              <button class="add-to-cart-btn">Agregar al carrito</button>
+              <button class="add-to-cart-btn" data-name="Nike Air Max 97" data-price="81999">Agregar al carrito</button>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@
             <div class="card-body">
               <h5 class="card-title"> Nike Dunk Low SE</h5>
               <p class="card-text">50.999$</p>
-              <button class="add-to-cart-btn">Agregar al carrito</button>
+              <button class="add-to-cart-btn" data-name="Nike Dunk Low SE" data-price="50999">Agregar al carrito</button>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@
               <div class="card-body">
                 <h5 class="card-title">Jordan 1 Low SE</h5>
                 <p class="card-text">62.999$</p>
-                <button class="add-to-cart-btn">Agregar al carrito</button>
+                <button class="add-to-cart-btn" data-name="Jordan 1 Low SE" data-price="62999">Agregar al carrito</button>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@
               <div class="card-body">
                 <h5 class="card-title">Nike Dunk Low Retro </h5>
                 <p class="card-text">52.999$</p>
-                <button class="add-to-cart-btn">Agregar al carrito</button>
+                <button class="add-to-cart-btn" data-name="Nike Dunk Low Retro" data-price="52999">Agregar al carrito</button>
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@
               <div class="card-body">
                 <h5 class="card-title">Nike Air Max 90</h5>
                 <p class="card-text">62.999$</p>
-                <button class="add-to-cart-btn">Agregar al carrito</button>
+                <button class="add-to-cart-btn" data-name="Nike Air Max 90" data-price="62999">Agregar al carrito</button>
               </div>
             </div>
           </div>
@@ -121,11 +121,72 @@
               <div class="card-body">
                 <h5 class="card-title">Nike Airforce 1'07 LV8</h5>
                 <p class="card-text">59.999$</p>
-                <button class="add-to-cart-btn">Agregar al carrito</button>
+                <button class="add-to-cart-btn" data-name="Nike Airforce 1'07 LV8" data-price="59999">Agregar al carrito</button>
               </div>
             </div>
           </div>
       </div>
+
+      <script>
+        // Módulo del carrito de compras
+        const ShoppingCart = (function() {
+            // Variables privadas
+            let cart = []; // Array para almacenar las zapatillas agregadas al carrito
+
+            // Elementos del DOM
+            const addToCartBtn = document.querySelectorAll('.add-to-cart-btn');
+            const cartItems = document.querySelector('#cart-items');
+            const cartTotal = document.querySelector('#cart-total');
+
+            // Función privada para calcular el precio total
+            function calculateTotal() {
+                return cart.reduce((total, item) => total + item.price, 0);
+            }
+
+            // Función privada para actualizar la visualización del carrito
+            function updateCartUI() {
+                cartItems.innerHTML = '';
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                    cartItems.appendChild(li);
+                });
+                cartTotal.textContent = `$${calculateTotal().toFixed(2)}`;
+            }
+
+            
+
+            // Función pública para agregar una zapatilla al carrito
+            function addToCart() {
+                const shoe = {
+                  id: 1,
+                  name: this.dataset.name, // Obtener el nombre del botón clicado
+                  price: parseFloat(this.dataset.price) // Obtener el precio del botón clicado
+                };
+              
+                cart.push(shoe);
+                updateCartUI();
+              }
+
+
+            // Inicialización del módulo
+            function init() {
+                addToCartBtn.forEach(button => {
+                    button.addEventListener('click', addToCart);
+                });
+            }
+
+            // Devolver las funciones y variables públicas
+            return {
+                init: init
+            };
+        })();
+
+        // Inicializar el módulo del carrito de compras
+        ShoppingCart.init();
+    </script>
+
+
 </body>
 
 <footer></footer>

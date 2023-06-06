@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <scriptsrc="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
     
     <nav class="navbar bg-body-tertiary-fixed top claseNav">
@@ -35,9 +35,17 @@
                   
                   <ul id="cart-items">
                     <!-- Aquí se mostrarán los elementos del carrito -->
+                    <!-- Ejemplo de un elemento en el carrito -->
+                    <li>
+                      <div class="cart-item-details">
+                        <span class="cart-item-name"></span>
+                        <span class="cart-item-price"></span>
+                      </div>
+                      
+                    </li>
                   </ul>
                   <p>Total: <span id="cart-total">$0.00</span></p>
-                </div>
+                  
 
               </li>
             </ul>
@@ -53,7 +61,7 @@
             <div class="card-body">
               <h5 class="card-title">Adidas Forum Low Blancas</h5>
               <p class="card-text">50.999$</p>
-              <button class="add-to-cart-btn">Agregar al carrito</button>
+              <button class="add-to-cart-btn" data-name="Adidas Forum Low Blancas" data-price="50999">Agregar al carrito</button>
             </div>
           </div>
         </div>
@@ -63,7 +71,7 @@
             <div class="card-body">
               <h5 class="card-title">Adidas Superstar Negras</h5>
               <p class="card-text">45.999$</p>
-              <button class="add-to-cart-btn">Agregar al carrito</button>
+              <button class="add-to-cart-btn" data-name="Adidas Superstar Negras" data-price="45999">Agregar al carrito</button>
             </div>
           </div>
         </div>
@@ -73,7 +81,7 @@
             <div class="card-body">
               <h5 class="card-title">Adidas Superstar Blancas</h5>
               <p class="card-text">65.000$</p>
-              <button class="add-to-cart-btn">Agregar al carrito</button>
+              <button class="add-to-cart-btn" data-name="Adidas Superstar Blancas" data-price="65000">Agregar al carrito</button>
             </div>
           </div>
         </div>
@@ -83,7 +91,7 @@
             <div class="card-body">
               <h5 class="card-title">ADI2000 Blancas</h5>
               <p class="card-text">55.999$</p>
-              <button class="add-to-cart-btn">Agregar al carrito</button>
+              <button class="add-to-cart-btn" data-name="ADI2000 Blancas" data-price="55999">Agregar al carrito</button>
             </div>
           </div>
         </div>
@@ -93,7 +101,8 @@
               <div class="card-body">
                 <h5 class="card-title">Adidas Cozi 70</h5>
                 <p class="card-text">$55.999</p>
-                <button class="add-to-cart-btn">Agregar al carrito</button>
+                <button class="add-to-cart-btn" data-name="Adidas Cozi 70" data-price="55999">Agregar al carrito</button>
+
               </div>
             </div>
           </div>
@@ -101,9 +110,10 @@
             <div class="card h-100">
               <img src="imagenes/adidas6.jpg" class="card-img-top" alt="adidas6">
               <div class="card-body">
-                <h5 class="card-title">Adidas Ozweego </h5>
-                <p class="card-text">$35  .000</p>
-                <button class="add-to-cart-btn">Agregar al carrito</button>
+                <h5 class="card-title">Adidas Ozweego</h5>
+                <p class="card-text">$35.000</p>
+                <button class="add-to-cart-btn" data-name="Adidas Ozweego" data-price="35000">Agregar al carrito</button>
+
               </div>
             </div>
           </div>
@@ -113,11 +123,72 @@
               <div class="card-body">
                 <h5 class="card-title">Adidas Forum Celestes</h5>
                 <p class="card-text">55.999$</p>
-                <button class="add-to-cart-btn">Agregar al carrito</button>
+                <button class="add-to-cart-btn" data-name="Adidas Forum Celestes" data-price="55999">Agregar al carrito</button>
+
               </div>
             </div>
           </div>
       </div>
+      <script>
+        // Módulo del carrito de compras
+        const ShoppingCart = (function() {
+            // Variables privadas
+            let cart = []; // Array para almacenar las zapatillas agregadas al carrito
+
+            // Elementos del DOM
+            const addToCartBtn = document.querySelectorAll('.add-to-cart-btn');
+            const cartItems = document.querySelector('#cart-items');
+            const cartTotal = document.querySelector('#cart-total');
+
+            // Función privada para calcular el precio total
+            function calculateTotal() {
+                return cart.reduce((total, item) => total + item.price, 0);
+            }
+
+            // Función privada para actualizar la visualización del carrito
+            function updateCartUI() {
+                cartItems.innerHTML = '';
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                    cartItems.appendChild(li);
+                });
+                cartTotal.textContent = `$${calculateTotal().toFixed(2)}`;
+            }
+
+            
+
+            // Función pública para agregar una zapatilla al carrito
+            function addToCart() {
+                const shoe = {
+                  id: 1,
+                  name: this.dataset.name, // Obtener el nombre del botón clicado
+                  price: parseFloat(this.dataset.price) // Obtener el precio del botón clicado
+                };
+              
+                cart.push(shoe);
+                updateCartUI();
+              }
+
+
+            // Inicialización del módulo
+            function init() {
+                addToCartBtn.forEach(button => {
+                    button.addEventListener('click', addToCart);
+                });
+            }
+
+            // Devolver las funciones y variables públicas
+            return {
+                init: init
+            };
+        })();
+
+        // Inicializar el módulo del carrito de compras
+        ShoppingCart.init();
+    </script>
+
+       
 </body>
 
 <footer></footer>
