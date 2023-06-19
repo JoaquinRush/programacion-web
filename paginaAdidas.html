@@ -34,8 +34,7 @@
                   </svg>
                   
                   <ul id="cart-items">
-                    <!-- Aquí se mostrarán los elementos del carrito -->
-                    <!-- Ejemplo de un elemento en el carrito -->
+                    
                     <li>
                       <div class="cart-item-details">
                         <span class="cart-item-name"></span>
@@ -45,8 +44,8 @@
                     </li>
                   </ul>
                   <p>Total: <span id="cart-total">$0.00</span></p>
-                  
-
+                  <button id="clear-cart-btn" class="btn btn-danger">Vaciar carrito</button>
+    </div>
               </li>
             </ul>
             
@@ -59,9 +58,9 @@
           <div class="card h-100">
             <img src="imagenes/adidas1.jpg" class="card-img-top" alt="adidas1">
             <div class="card-body">
-              <h5 class="card-title">Adidas Forum Low Blancas</h5>
-              <p class="card-text">50.999$</p>
-              <button class="add-to-cart-btn" data-name="Adidas Forum Low Blancas" data-price="50999">Agregar al carrito</button>
+              <h5 class="card-title">Adidas Forum CL</h5>
+              <p class="card-text">59.999$</p>
+              <button class="add-to-cart-btn" data-name="Adidas Forum CL" data-price="59999">Agregar al carrito</button>
             </div>
           </div>
         </div>
@@ -130,22 +129,23 @@
           </div>
       </div>
       <script>
-        // Módulo del carrito de compras
+        
         const ShoppingCart = (function() {
-            // Variables privadas
-            let cart = []; // Array para almacenar las zapatillas agregadas al carrito
-
-            // Elementos del DOM
+            
+            let cart = []; 
+            
             const addToCartBtn = document.querySelectorAll('.add-to-cart-btn');
             const cartItems = document.querySelector('#cart-items');
             const cartTotal = document.querySelector('#cart-total');
-
-            // Función privada para calcular el precio total
+ 
             function calculateTotal() {
                 return cart.reduce((total, item) => total + item.price, 0);
             }
-
-            // Función privada para actualizar la visualización del carrito
+            function clearCart() {
+                cart = []; 
+                updateCartUI();
+            }
+            
             function updateCartUI() {
                 cartItems.innerHTML = '';
                 cart.forEach(item => {
@@ -155,38 +155,36 @@
                 });
                 cartTotal.textContent = `$${calculateTotal().toFixed(2)}`;
             }
-
             
-
-            // Función pública para agregar una zapatilla al carrito
             function addToCart() {
                 const shoe = {
                   id: 1,
-                  name: this.dataset.name, // Obtener el nombre del botón clicado
-                  price: parseFloat(this.dataset.price) // Obtener el precio del botón clicado
+                  name: this.dataset.name, 
+                  price: parseFloat(this.dataset.price) 
                 };
               
                 cart.push(shoe);
                 updateCartUI();
               }
-
-
-            // Inicialización del módulo
+            
             function init() {
                 addToCartBtn.forEach(button => {
                     button.addEventListener('click', addToCart);
-                });
+                
+                const clearCartBtn = document.getElementById('clear-cart-btn');
+                clearCartBtn.addEventListener('click', clearCart);
+                        });
             }
-
-            // Devolver las funciones y variables públicas
+          
             return {
                 init: init
             };
         })();
-
-        // Inicializar el módulo del carrito de compras
+         
         ShoppingCart.init();
-    </script>
+        
+        
+            </script>
 
        
 </body>

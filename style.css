@@ -44,30 +44,39 @@ header{
     position: absolute;
   }
 }
-
-.botonvolver{
+.botonvolver {
+  border: none;
   border-radius: 5px;
-  background-color: rgb(230, 229, 227);
-  margin-top: 1vw;
-  margin-left: 1vw;
-  margin-bottom: 1vw;
-  width: 60px;                                                    
+  background-color: rgb(48, 50, 51);
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  }
   
+  .botonvolver:hover {
+  background-color: rgb(204, 210, 215);
+  }
   
-
-}
+  .botonvolver:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
 
 #titular{
     font-family:"Lucida Console","Courier liew",monospace}
 
 .blur-effect{
-  filter: blur(5px); /* Cambia el valor de 5px según lo que desees */
-
+  filter: blur(5px); 
 }
 
 .blur-effect:hover {
-    filter: none; /* Cambia el valor de 5px según lo que desees */
-    transition: all 0.3s ease; /* Añade transición suave al pasar el cursor */
+    filter: none; 
+    transition: all 0.3s ease; 
   }
 
 
@@ -158,11 +167,28 @@ header{
   filter: blur(5px);
 }
 
-.add-to-cart-btn{
+.add-to-cart-btn {
+  border: none;
   border-radius: 5px;
-  height:45px;
-  background-color: rgb(163, 158, 150);
-}
+  background-color: rgb(48, 50, 51);
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  }
+  
+  .add-to-cart-btn:hover {
+  background-color: rgb(204, 210, 215);
+  }
+  
+  .add-to-cart-btn:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
 
 #cart {
   background-color: #f8f8f8;

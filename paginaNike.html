@@ -35,6 +35,7 @@
                     <!-- Aquí se mostrarán los elementos del carrito -->
                   </ul>
                   <p>Total: <span id="cart-total">$0.00</span></p>
+                  <button id="clear-cart-btn" class="btn btn-danger">Vaciar carrito</button>
                 </div>
 
               </li>
@@ -128,22 +129,23 @@
       </div>
 
       <script>
-        // Módulo del carrito de compras
+      
         const ShoppingCart = (function() {
-            // Variables privadas
-            let cart = []; // Array para almacenar las zapatillas agregadas al carrito
+         
+            let cart = []; 
 
-            // Elementos del DOM
             const addToCartBtn = document.querySelectorAll('.add-to-cart-btn');
             const cartItems = document.querySelector('#cart-items');
             const cartTotal = document.querySelector('#cart-total');
 
-            // Función privada para calcular el precio total
             function calculateTotal() {
                 return cart.reduce((total, item) => total + item.price, 0);
             }
-
-            // Función privada para actualizar la visualización del carrito
+            function clearCart() {
+                cart = []; 
+                updateCartUI();
+            }
+            
             function updateCartUI() {
                 cartItems.innerHTML = '';
                 cart.forEach(item => {
@@ -154,35 +156,30 @@
                 cartTotal.textContent = `$${calculateTotal().toFixed(2)}`;
             }
 
-            
-
-            // Función pública para agregar una zapatilla al carrito
             function addToCart() {
                 const shoe = {
                   id: 1,
-                  name: this.dataset.name, // Obtener el nombre del botón clicado
-                  price: parseFloat(this.dataset.price) // Obtener el precio del botón clicado
+                  name: this.dataset.name, 
+                  price: parseFloat(this.dataset.price) 
                 };
               
                 cart.push(shoe);
                 updateCartUI();
               }
 
-
-            // Inicialización del módulo
             function init() {
                 addToCartBtn.forEach(button => {
                     button.addEventListener('click', addToCart);
+                const clearCartBtn = document.getElementById('clear-cart-btn');
+                clearCartBtn.addEventListener('click', clearCart);
                 });
             }
 
-            // Devolver las funciones y variables públicas
             return {
                 init: init
             };
         })();
 
-        // Inicializar el módulo del carrito de compras
         ShoppingCart.init();
     </script>
 
