@@ -17,8 +17,10 @@
       <div class="container-fluid barranav">
         
         <a href="index.html"><button class="botonvolver">Volver</button> </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button id="botoncart" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="bi bi-cart"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg></span>
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header">
@@ -129,60 +131,66 @@
           </div>
       </div>
       <script>
-        
-        const ShoppingCart = (function() {
-            
-            let cart = []; 
-            
-            const addToCartBtn = document.querySelectorAll('.add-to-cart-btn');
-            const cartItems = document.querySelector('#cart-items');
-            const cartTotal = document.querySelector('#cart-total');
- 
-            function calculateTotal() {
-                return cart.reduce((total, item) => total + item.price, 0);
-            }
-            function clearCart() {
-                cart = []; 
-                updateCartUI();
-            }
-            
-            function updateCartUI() {
-                cartItems.innerHTML = '';
-                cart.forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-                    cartItems.appendChild(li);
-                });
-                cartTotal.textContent = `$${calculateTotal().toFixed(2)}`;
-            }
-            
-            function addToCart() {
-                const shoe = {
-                  id: 1,
-                  name: this.dataset.name, 
-                  price: parseFloat(this.dataset.price) 
-                };
-              
-                cart.push(shoe);
-                updateCartUI();
-              }
-            
-            function init() {
-                addToCartBtn.forEach(button => {
-                    button.addEventListener('click', addToCart);
-                
-                const clearCartBtn = document.getElementById('clear-cart-btn');
-                clearCartBtn.addEventListener('click', clearCart);
-                        });
-            }
-          
-            return {
-                init: init
-            };
-        })();
+       
+       const ShoppingCart = (function() {
          
-        ShoppingCart.init();
-        
+         let cart = {}; 
+
+         const addToCartBtn = document.querySelectorAll('.add-to-cart-btn');
+         const cartItems = document.querySelector('#cart-items');
+         const cartTotal = document.querySelector('#cart-total');
+
+         function calculateTotal() {
+           let total = 0;
+           for (const itemName in cart) {
+             total += cart[itemName].price * cart[itemName].quantity;
+           }
+           return total;
+         }
+         function clearCart() {
+             cart = {}; 
+             updateCartUI();
+         }
+         
+         function updateCartUI() { cartItems.innerHTML = '';
+             for (const itemName in cart) {
+               const item = cart[itemName];
+               const li = document.createElement('li');
+               li.textContent = `${itemName}  (${item.quantity})  $${(item.price * item.quantity).toFixed(2)}`;
+               cartItems.appendChild(li);
+             }
+             cartTotal.textContent = `$${calculateTotal().toFixed(2)}`;
+           }
+
+         function addToCart(){
+           const itemName = this.dataset.name;
+           const itemPrice = parseFloat(this.dataset.price);
+
+           if (cart[itemName]) { 
+             cart[itemName].quantity += 1;
+           } else {
+             cart[itemName] = {
+               price: itemPrice,
+               quantity: 1
+             };
+           }
+
+           updateCartUI();
+         }
+         function init() {
+             addToCartBtn.forEach(button => {
+                 button.addEventListener('click', addToCart);
+             const clearCartBtn = document.getElementById('clear-cart-btn');
+             clearCartBtn.addEventListener('click', clearCart);
+             });
+         }
+
+         return {
+             init: init
+         };
+     })();
+
+     ShoppingCart.init();
         
             </script>
 
